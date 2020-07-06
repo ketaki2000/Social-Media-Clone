@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/be0ad558f3.js" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+ <style>
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#a li {
+  display: inline;
+}
+
+
+body {
+
+  background-color: #f1f1f1;
+  /* background-image: url('https://www.freelogodesign.org/file/app/client/thumb/3a85ea62-5604-4dfa-a3f0-b5f3f1b9114e_200x200.png?1586357230022'); */
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding-left: none;
+}
+
+
+html, body, h1, h2, h3, h4, h5 {font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+
+    .row.content {height: 600px;
+
+    }
+
+    .bg-info{background-color:rgb(0, 90, 90)!important}
+
+    footer {
+      background-color: black;
+      color: white;
+      padding: 15px;
+      width:auto;
+    }
+
+
+      .row.content {height:auto;}
+    }
+    /* .container i{
+      transition: .4s;
+    } */
+    .container:hover i{
+      color:#f50057;
+    }
+    .fas{
+      color:#f50057;
+      transition: .4s
+    }
+    .logo{
+            background-color: rgb(0, 90, 90);
+            object-fit: cover;
+            height: 40px;
+            width: 100px;
+            /* object-position: 100px 200px; */
+        }
+    .logo:hover,li:hover{
+      transform: translate(2px,2px)
+    }
+</style>
+
+    {% if title %}
+        <title>VJgram - {{ title }}</title>
+    {% else %}
+        <title>VJgram</title>
+    {% endif %}
+</head>
+<body>
+     <div class="bs-example">
+     <header class="site-header">
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-info" style="font-size: large; color: snow; position : fixed; z-index:1; width:100%;height : 60px;">
+        <a class="navbar-brand" href="{% url '
+        page' %}"><img class="logo" src="https://www.freelogodesign.org/file/app/client/thumb/1d7a5b4d-cda1-4f24-b5a2-34b422a988af_200x200.png?1586113790372" height="50" width="50"  alt="vbv"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item" id="a">
+              <a class="nav-link" href="{% url 'mainpage' %}"><b>Home</b></a>
+            </li>
+            <li class="nav-item" id="a">
+                <a class="nav-link" href="{% url 'about' %}"><b>About</b></a>
+              </li>
+          </ul>
+          <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item" id="a">
+              <a class="nav-link" href="{% url 'profile' %}"><b>Profile</b></a>
+            </li>
+            <li class="nav-item" id="a">
+              <a class="nav-link" href="{% url 'logout' %}"><b>Logout</b></a>
+            </li>
+            {% else %}
+            <li class="nav-item" id="a">
+                <a class="nav-link" href="{% url 'login' %}"><b>Login</b></a>
+              </li>
+              <li class="nav-item" id="a">
+                <a class="nav-link" href="{% url 'register' %}"><b>Sign Up</b></a>
+              </li>
+            {% endif %}
+         </ul>
+        </div>
+      </nav>
+
+    </header>
+    </div>
+
+          {% block content %}
+
+
+          {% endblock %}
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+</body>
+</html>

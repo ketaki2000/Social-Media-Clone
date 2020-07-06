@@ -1,0 +1,63 @@
+{% extends 'VJgramapp/base1.html' %}
+{% load crispy_forms_tags%}
+{% block content %}
+<style>
+
+.jumbotron:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  transform: translate(2px,2px);
+}
+
+  input:hover,button:hover{
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.1);
+		transform: translate(3px,3px);
+	}
+
+.container {
+  padding: 50px 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.jumbotron{
+  color: rgb(0,90,90);
+  border: 1px solid #dddddd;
+	border-left: 7px solid teal;
+	border-bottom: 1px solid teal;
+  border-radius: 20px;
+  padding: 30px 20px;
+}
+
+}
+</style>
+<div class="container" style ="width:100%">
+  <div class="jumbotron">
+<!-- <div class="content-section"> -->
+<div style="text-align: center;">
+<img class="rounded-circle account-img" height="150" width="150" src="{{ user.profile.image.url }}"><br><br>
+<div class="media-body">
+  <h2 class="account-heading" >{{user.username}}</h2>
+  <h5 class="text-secondary">{{user.email}}</h5>
+</div>
+</div><br>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">
+            Profile Info
+        </legend>
+        {{ u_form|crispy}}
+        {{ p_form|crispy}}
+    </fieldset>
+    <div class="form-group" style="text-align: center;">
+        <button class="btn btn-outline-info" style="padding: .75% 7.5%;" type="submit">
+            Update
+        </button>
+    </div>
+</form>
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'VJgramapp/base1.html' %}
+{% load crispy_forms_tags%}
+{% block content %}
+<style>
+
+.jumbotron{
+	padding: 30px 20px;
+}
+
+.jumbotron:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  transform: translate(3px,3px);
+}
+
+input:hover,button:hover{
+		transform: translate(3px,3px);
+	}
+
+.box{
+	color: rgb(0, 78, 78);
+	margin: 0 25%;
+	border: 1px solid #dddddd;
+	border-left: 7px solid teal;
+	border-bottom: 1px solid teal;
+}
+
+.box:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+}
+</style>
+<div class="container"><br>
+	<div class="jumbotron box">
+	<!-- <div class="content-section"> -->
+		<form method="POST" style="text-align: center;">
+			{% csrf_token %}
+			<fieldset class="form-group" style="font-size: large;">
+				<legend class="border-bottom" style="font-size: 2rem; padding-bottom: 10px;">
+					Log In
+				</legend>
+				<!-- <div class="col-xs-10" style="width: 100%"> -->
+				{{ form|crispy}}
+				<!-- </div> -->
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit" style="padding: 1% 7.5%;">
+					Login
+				</button>
+			</div>
+			<div class="border-top pt-2">
+				<small class="text-muted">
+					Need an account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+				</small>
+			</div>
+		</form>
+	</div>
+<!-- </div> -->
+{% endblock%}

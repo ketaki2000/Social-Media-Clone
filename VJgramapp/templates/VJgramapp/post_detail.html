@@ -1,0 +1,310 @@
+{%extends 'VJgramapp/base1.html'%}
+{%block content%}
+
+<style>
+	.jumbotron{
+		color: rgb(0, 90, 90);
+		margin: 3% 30%;
+		border: 1px solid #dddddd;
+		border-left: 7px solid teal;
+		border-bottom: 1px solid teal;
+		border-radius: 20px;
+		padding: 20px;
+	}
+	/* #myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;} */
+
+.list-group-item,.nav-link{
+	color: snow;
+	background-color: rgb(0, 90, 90);
+	border-radius-top: 10px;
+}
+
+.nav-link:hover{
+	color: #05ffd5;
+}
+
+
+].modal-content {
+  margin: auto;
+  display: block;
+}
+
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)}
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  } */
+}
+</style>
+<div class="row">
+	<div class="col-md-3">
+
+	        <div class="sidenav">
+	        <p class='text-muted'>
+	            <ul class="list-group">
+							    <li class="list-group-item">
+									    <a class="nav-link" href="{% url 'post-create' %}"><b>Want to Post?</b></a>
+							    </li>
+									<li class="list-group-item">
+									    <a class="nav-link" href="{% url 'user-posts' user.username %}"><b>Want to see your posts?</b></a>
+							    </li>
+									<li class="list-group-item">
+									    <a class="nav-link" href="{% url 'friends' user.username %}"><b>Want to see your friends?</b></a>
+							    </li>
+									<li class="list-group-item">
+									    <a class="nav-link" href="{% url 'otherusers' %}"><b>Want to add some new friends?</b></a>
+								</li>
+								<li class="list-group-item list-group-item-light">
+									<a class="nav-link" href="{% url 'group-create' %}"><b>Want to make a group?</b></a>
+							</li>
+									<li class="list-group-item">
+	                    				<a class="nav-link" href="{% url 'groups' %}"><b>Want to see your groups?</b></a>
+	               				 </li>
+									<li class="list-group-item">
+											<a class="nav-link" href="{% url 'othergroups' %}"><b>Want to join some new group?</b></a>
+									</li>
+									<li class="list-group-item">
+											<a class="nav-link" href="{% url 'user-groups' %}"><b>Want to see groups you created?</b></a>
+									</li>
+	            </ul>
+	        </p>
+					</div>
+	</div>
+	<div class="col-md-8">
+    <br>
+<div class="jumbotron">
+    <div class="row">
+        <div style="padding-left: 15px;">
+            <img id="myImg" class="rounded-circle article-img" height=50 width=50 src="{{ object.author.profile.image.url }}">
+        </div>
+        <div class="col-md-4">
+            <h2 style="padding-top: 7px;">
+                <b>
+                    <a style="color: rgb(0, 90, 90);" href="{% url 'user-posts' user.username%}">
+                        {{ object.author }}
+                    </a>
+                </b>
+            </h2>
+        </div>
+    </div>
+    <br>
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div> 
+    <div style="text-align: center; background-color: black; border-radius: 10px;">
+        <img width="250" height="250" style="width:100%;cursor:pointer;"
+  onclick="document.getElementById('modal01').style.display='block'" id="myImg" src="{{ object.image.url }}" alt="Card image cap">
+        <br>
+    </div>
+    <br>
+    <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+    <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+    <div class="w3-modal-content w3-animate-zoom">
+      <img src="{{ object.image.url }}"  style="width:100%">
+    </div>
+  </div>
+        <a class="article-title" style="color: rgb(0, 90, 90); font-size: 2rem;" href="{% url 'post-detail' post.id %}">
+            {{ object.title }}
+        </a>
+    &nbsp;<br>
+    <span class="article-content">
+        {{ object.content }}
+    </span>
+    <br>
+		<div class="btn-group" style="padding-top: 5px;">
+				{% for like in likes %}
+						{% if like.post_id == post %}
+								<button type="button" class="likebutton btn btn-danger">
+										Like
+								</button>
+						{% endif %}
+						{% empty %}
+								<button type="button" class="likebutton btn btn-danger far fa-heart " id="like{{post.id}}"  data-catid="{{ post.id }}" >
+										Like
+								</button>
+				{% endfor %}
+		</div>
+
+		<div class="container" id="{{post.id}}">
+
+						{% for comment in comments %}
+								{% if comment.post_id == post %}
+										<p class="article-content" style="padding: 5px; font-size: 1rem;">
+												<b>{{ comment.user_id }} </b> :	{{ comment.content }}
+												<span class="article-content" style="font-size: x-small; text-align: right;">
+														<span style="text-align:center;">
+																{{ comment.date_created }}
+														</span>
+												</span>
+										</p>
+										<br>
+										<br>
+
+								{% endif%}
+						{% endfor %}
+						<div class="c" id="c">
+					</div>
+				<br>
+				<br>
+				<form method="POST">
+						{% csrf_token %}
+
+						<input placeholder="New Comment" type="text" id="fname" data-commentid="{{ post.id }}">
+						<button type="button" class="commentbutton btn-primary fa fa-comment" id="commentbutton" href="#" data-commentid="{{ post.id }}" >
+						Post
+						</button>
+
+				</form>
+    {% if post.author == user%}
+    <div style="text-align: right;padding-top: 20px;padding-bottom: 20px;">
+        <a class="btn btn-secondary" href="{%url 'post-update' post.id %}" >Update</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-danger" href="{%url 'post-delete' post.id %}"> Delete</a>
+    </div>
+    <small class="text-muted" style="font-size: medium;">Posted on: {{ object.date_posted }}</small>
+
+{% endif %}
+</div>
+
+</div></div>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$(function()
+{
+		$('.likebutton').click
+		(
+				function()
+				{
+						var catid;
+						catid = $(this).attr("data-catid");
+						$(this).css("background-color","green");
+						$.ajax
+						(
+								{
+										type:"POST",
+										url: "/likepost",
+										data:
+												{
+														post_id: catid
+												},
+								}
+						)
+						console.log("this was executed correctly");
+				}
+		)
+		$('#commentbutton').click
+		(
+				function()
+				{
+						var catid;
+						catid = $(this).attr("data-commentid");
+						$(this).css("background-color","blue");
+						var t = $(this);
+						var cid;
+						cid = $(this).attr("data-commentid");
+						var comment_data;
+						comment_data = $(this).parent().find("#fname").val();
+						console.log(comment_data)
+						$.ajax
+						(
+								{
+									type:"POST",
+									url: "/commentPost",
+									data:
+												{   // < here
+											'post_id': catid,
+							'content': comment_data,
+								},
+								success:function(data)
+								{
+									var prevState = t.parent().parent().html();
+									message = user.username + " : " + comment_data;
+									if(prevState.length >4)
+									{ prevState = prevState+"<br>";}
+									t.parent().parent().html(prevState + message );
+								}
+					}
+			)
+			console.log("this comment executed correctly");
+		}
+	)
+});
+</script>
+<!--JS-->
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+</script>
+{% endblock%}
